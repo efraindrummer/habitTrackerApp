@@ -17,8 +17,6 @@ class _HomePageState extends State<HomePage> {
   HabitDatabase db = HabitDatabase();
   final _myBox = Hive.box("Habit_Database");
 
-  bool habitCompleted = false;
-
   @override
   void initState() {
     
@@ -37,17 +35,17 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       db.todaysHabitList[index][1] = value;
     });
+    db.updateDatabase();
   }
 
   final _newHabitNameController = TextEditingController();
-
   void createNewHabit(){
     showDialog(
       context: context,
       builder: (context){
         return MyAlertBox(
           controller: _newHabitNameController,
-          hintText: "Enter Habit Name",
+          hintText: "Enter Habit Name...",
           onSave: saveNewHabit,
           onCancel: cancelDialogBox,
         );
@@ -61,6 +59,7 @@ class _HomePageState extends State<HomePage> {
     });
     _newHabitNameController.clear();
     Navigator.of(context).pop();
+    db.updateDatabase();
   }
 
   void cancelDialogBox(){
@@ -75,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         return MyAlertBox(
           controller: _newHabitNameController,
           hintText: db.todaysHabitList[index][0],
-          onSave: () =>saveExistingHabit(index), 
+          onSave: () => saveExistingHabit(index), 
           onCancel: cancelDialogBox,
         );
       }
@@ -87,21 +86,21 @@ class _HomePageState extends State<HomePage> {
       db.todaysHabitList[index][0] = _newHabitNameController.text;
     });
     _newHabitNameController.clear();
-    Navigator.of(context);
+    Navigator.pop(context);
+    db.updateDatabase();
   }
 
   void deleteHabit(int index){
     setState(() {
       db.todaysHabitList.removeAt(index);
     });
+    db.updateDatabase();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: MyFloatingActionButton(
-        onPressed: () => createNewHabit(),
-      ),
+      floatingActionButton: MyFloatingActionButton(onPressed: createNewHabit),
       backgroundColor: Colors.grey[300],
       body: ListView.builder(
         itemCount: db.todaysHabitList.length,

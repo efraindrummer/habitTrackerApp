@@ -6,7 +6,7 @@ void main() async {
   await Hive.initFlutter();
 
   await Hive.openBox("Habit_Database");
-  MyApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

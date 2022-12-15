@@ -30,7 +30,7 @@ class HabitDatabase {
       todaysHabitList = _myBox.get(todaysDateFormatted());
     }
   }
-  //actualizarr data
+  //actualizar data
   void updateDatabase(){
     //update todays entry
     _myBox.put(todaysDateFormatted(), todaysHabitList);
