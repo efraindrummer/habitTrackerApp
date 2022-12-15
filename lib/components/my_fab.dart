@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MyFloartingActionButton extends StatelessWidget {
+class MyFloatingActionButton extends StatelessWidget {
 
   final Function()? onPressed;
 
-  const MyFloartingActionButton({Key? key, this.onPressed}) : super(key: key);
+  const MyFloatingActionButton({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

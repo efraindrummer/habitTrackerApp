@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:trackerhabits/pages/home_page.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  await Hive.initFlutter();
+
+  await Hive.openBox("Habit_Database");
+  MyApp();
+}
 
 class MyApp extends StatelessWidget {
   @override
