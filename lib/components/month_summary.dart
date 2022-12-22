@@ -7,7 +7,8 @@ class MonthSummary extends StatelessWidget {
   final Map<DateTime, int>? datasets;
   final String startDate;
 
-  const MonthSummary({ 
+  const MonthSummary({
+    super.key,  
     required this.datasets, 
     required this.startDate
   });
@@ -18,7 +19,7 @@ class MonthSummary extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25, bottom: 25),
       child: HeatMap(
         startDate: createDateTimeObject(startDate),
-        endDate: DateTime.now().add(Duration(days: 0)),
+        endDate: DateTime.now().add(const Duration(days: 0)),
         datasets: datasets,
         colorMode: ColorMode.color,
         defaultColor: Colors.grey[200],
